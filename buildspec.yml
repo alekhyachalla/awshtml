@@ -1,0 +1,17 @@
+  
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - docker build -t webserver-image:v1 .
+      - docker run -d -p 80:80 webserver-image:v1
+artifacts:
+  files:
+    -  Dockerfle
+    -  index.html
+eb_codebuild_settings:
+  CodeBuildServiceRole: AWSCodePipelineServiceRole-us-east-1-dockerpipeline
+  ComputeType: BUILD_GENERAL1_SMALL
+  Image: aws/codebuild/standard:2.0
+  Timeout: 60
